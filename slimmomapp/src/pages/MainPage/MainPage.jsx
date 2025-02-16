@@ -1,5 +1,5 @@
 import React from "react";
-import DailyCaloriesForm from "../components/DailyCaloriesForm";
+import DailyCaloriesForm from "../../components/DailyCaloriesForm/DailyCaloriesForm";
 
 const MainPage = () => {
   const handleFormSubmit = (data) => {
