@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const loaderSlice = createSlice({
   name: "loader",
-  initialState: false,
+  initialState: { isLoading: false },
   reducers: {
-    setLoader: (state, action) => {
-      return action.payload;
+    showLoader: (state) => {
+      state.isLoading = true;
+    },
+    hideLoader: (state) => {
+      state.isLoading = false;
     },
   },
 });
 
-export const { setLoader } = loaderSlice.actions;
-
+export const { showLoader, hideLoader } = loaderSlice.actions;
 export default loaderSlice.reducer;

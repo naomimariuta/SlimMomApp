@@ -7,16 +7,32 @@ const UserInfo = () => {
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <div className="flex items-center space-x-4">
-      <span className="text-lg font-semibold">{user?.name}</span>
-      <button
-        onClick={() => dispatch(logoutSuccess())}
-        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-      >
+    <div style={styles.userInfo}>
+      <p style={styles.name}>{user?.name}</p>
+      <button style={styles.logout} onClick={() => dispatch(logoutSuccess())}>
         Logout
       </button>
     </div>
   );
+};
+
+const styles = {
+  userInfo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  name: {
+    color: "#FC842D",
+    fontWeight: "bold",
+  },
+  logout: {
+    background: "transparent",
+    border: "none",
+    color: "#9B9FAA",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
 };
 
 export default UserInfo;

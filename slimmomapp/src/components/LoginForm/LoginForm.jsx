@@ -1,44 +1,49 @@
+// src/components/LoginForm/LoginForm.jsx
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../store/authSlice";
+import Button from "../Button/Button";
+import styles from "./LoginForm.module.css";
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
+const LoginForm = ({ onLogin, error, onRegister }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginSuccess({ email }));
+    onLogin(email, password);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 p-6 bg-white rounded-lg shadow-md w-full max-w-sm"
-    >
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-      />
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-colors"
-      >
-        Login
-      </button>
+    <form onSubmit={handleLogin} className={styles.form}>
+      <label className={styles.label}>
+        Email *
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
+          required
+        />
+      </label>
+      <label className={styles.label}>
+        Password *
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+          required
+        />
+      </label>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div className={styles.buttonContainer}>
+        <Button type="submit" text="Log in" variant="colorButton" />
+        <Button
+          type="button"
+          text="Register"
+          variant="whiteButton"
+          handlerFunction={onRegister}
+        />
+      </div>
     </form>
   );
 };

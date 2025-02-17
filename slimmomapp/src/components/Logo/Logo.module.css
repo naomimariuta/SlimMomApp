@@ -1,0 +1,34 @@
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  height: auto;
+  width: auto;
+}
+
+.logoImg,
+.logoTablet,
+.logoDesktop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .logoImg {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .logoTablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .logoDesktop {
+    display: block;
+  }
+}

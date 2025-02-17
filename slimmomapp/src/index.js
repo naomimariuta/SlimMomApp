@@ -6,13 +6,25 @@ import { store } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import AuthProvider from "./context/authContext";
+import { BloodTypeProvider } from "./context/bloodTypeContext";
+import CalorieInfoProvider from "./context/calorieInfoContext";
+import { ConsumedProductsProvider } from "./context/consumedProductsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AuthProvider>
+      <BloodTypeProvider>
+        <CalorieInfoProvider>
+          <ConsumedProductsProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ConsumedProductsProvider>
+        </CalorieInfoProvider>
+      </BloodTypeProvider>
+    </AuthProvider>
   </Provider>
 );
 
