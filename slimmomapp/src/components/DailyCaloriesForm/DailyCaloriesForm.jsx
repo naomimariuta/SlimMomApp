@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 const DailyCaloriesForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({ age: "", weight: "", height: "" });
+  const [formData, setFormData] = useState({
+    age: "",
+    weight: "",
+    height: "",
+    desiredWeight: "",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
