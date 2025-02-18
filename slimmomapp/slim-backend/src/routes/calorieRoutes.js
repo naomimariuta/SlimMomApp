@@ -4,7 +4,7 @@ const {
   saveCalorieInfo,
   getCalorieInfo,
 } = require("../controllers/calorieController");
-const { validateAuth } = require("../middleware/validationMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 /**
  * @swagger
@@ -55,7 +55,7 @@ const { validateAuth } = require("../middleware/validationMiddleware");
  *       500:
  *         description: Internal server error
  */
-router.post("/save-calorie-info", validateAuth, saveCalorieInfo);
+router.post("/save-calorie-info", authMiddleware, saveCalorieInfo);
 
 /**
  * @swagger
@@ -94,6 +94,6 @@ router.post("/save-calorie-info", validateAuth, saveCalorieInfo);
  *       500:
  *         description: Internal server error
  */
-router.get("/get-calorie-info", validateAuth, getCalorieInfo);
+router.get("/get-calorie-info", authMiddleware, getCalorieInfo);
 
 module.exports = router;

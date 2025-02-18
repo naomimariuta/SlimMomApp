@@ -19,7 +19,12 @@ connectMongoDB();
 
 app.use(express.static("public"));
 app.use(morgan(logger));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true, // Permite trimiterea cookie-urilor (important pentru a transmite token-ul)
+  })
+);
 app.use(express.json());
 app.use(passport.initialize());
 

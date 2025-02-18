@@ -98,6 +98,7 @@ const DailyCaloriesForm = () => {
   };
 
   const saveCalorieData = async (dailyKcal, notRecommendedProducts) => {
+    console.log("sunt in saveCalorieData");
     const calorieInfo = {
       height: formData.height,
       age: formData.age,
@@ -108,7 +109,7 @@ const DailyCaloriesForm = () => {
       notRecommendedFoods:
         notRecommendedProducts.map((food) => food.title) || [],
     };
-
+    console.log("am iesit si intru la saveCalorieInfo");
     await saveCalorieInfo(calorieInfo);
     setCalorieInfo(calorieInfo);
 

@@ -13,7 +13,8 @@ const RegistrationPage = () => {
 
   const handleRegister = async (name, email, password) => {
     try {
-      const data = await register({ name, email, password });
+      const data = await register({ name, email, password, role: "user" });
+      localStorage.setItem("token", data.token);
       setAuth({ token: data.token, isAuthenticated: true, user: data.user });
       console.log("Registered user name:", data.user.name);
       navigate("/calculator");

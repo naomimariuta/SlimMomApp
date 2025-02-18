@@ -17,6 +17,7 @@ const LoginPage = () => {
   const handleLogin = async (email, password) => {
     try {
       const data = await login({ email, password });
+      localStorage.setItem("token", data.token);
       setAuth({ token: data.token, isAuthenticated: true, user: data.user });
       navigate(redirectTo);
     } catch (err) {

@@ -9,6 +9,7 @@ const RegistrationForm = ({ onRegister, error, onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Sending data to register:", { name, email, password });
     onRegister(name, email, password);
   };
 
