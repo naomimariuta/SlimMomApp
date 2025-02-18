@@ -12,7 +12,7 @@ const BurgerMenu = () => {
   return (
     <div className={styles.burgerMenu}>
       <button onClick={toggleMenu} className={styles.burgerButton}>
-        ☰ {/* Unicode character for burger icon */}
+        &#9776; {/* Unicode character for burger icon */}
       </button>
       {isOpen && (
         <div className={styles.menu}>

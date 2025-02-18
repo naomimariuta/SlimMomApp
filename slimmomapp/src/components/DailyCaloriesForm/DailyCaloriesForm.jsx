@@ -12,6 +12,18 @@ import { AuthContext } from "../../context/authContext";
 import { CalorieInfoContext } from "../../context/calorieInfoContext";
 import { saveCalorieInfo } from "../../api/calorieInfo";
 
+const translations = {
+  calculate_daily_intake: "Calculate Daily Intake",
+  height: "Height",
+  age: "Age",
+  currentWeight: "Current Weight",
+  desireWeight: "Desired Weight",
+  blood_type: "Blood Type",
+  start_losing_weight: "Start Losing Weight",
+  recommended_calorie_intake: "Recommended Calorie Intake",
+  foods_not_eat: "Foods Not Recommended",
+};
+
 const DailyCaloriesForm = () => {
   const [formData, setFormData] = useState({
     height: "",
@@ -82,7 +94,7 @@ const DailyCaloriesForm = () => {
 
   const handleStartLosingWeight = () => {
     setIsModalOpen(false);
-    navigate("/registration");
+    navigate("/register");
   };
 
   const saveCalorieData = async (dailyKcal, notRecommendedProducts) => {
@@ -110,87 +122,96 @@ const DailyCaloriesForm = () => {
     <>
       {loading && <Loader />}
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.title}>Calculează aportul zilnic de calorii</div>
-
+        <div className={styles.title}>
+          {translations.calculate_daily_intake}
+        </div>
         <div className={styles.twoColumns}>
           <section>
+            {["height", "age", "currentWeight", "desireWeight"].map((field) => (
+              <div key={field} className={styles.formGroup}>
+                <label className={styles.label}>
+                  {translations[field]} *
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className={styles.input}
+                    required
+                  />
+                </label>
+              </div>
+            ))}
             <div className={styles.formGroup}>
-              <label className={styles.label}>
-                Înălțime *
-                <input
-                  type="number"
-                  name="height"
-                  value={formData.height}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>
-                Vârstă *
-                <input
-                  type="number"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>
-                Greutate actuală *
-                <input
-                  type="number"
-                  name="currentWeight"
-                  value={formData.currentWeight}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
-            </div>
-          </section>
-
-          <section>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>
-                Greutate dorită *
-                <input
-                  type="number"
-                  name="desireWeight"
-                  value={formData.desireWeight}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
+              <span className={styles.label}>{translations.blood_type} *</span>
+              <div className={styles.divider}></div>
+              <div className={styles.radioGroup}>
+                <label className={styles.label}>
+                  <input
+                    type="radio"
+                    name="bloodType"
+                    value="1"
+                    checked={bloodType === "1"}
+                    onChange={(e) => setBloodType(e.target.value)}
+                    required
+                  />
+                  <span>0</span>
+                </label>
+                <label className={styles.label}>
+                  <input
+                    type="radio"
+                    name="bloodType"
+                    value="2"
+                    checked={bloodType === "2"}
+                    onChange={(e) => setBloodType(e.target.value)}
+                    required
+                  />
+                  <span>A</span>
+                </label>
+                <label className={styles.label}>
+                  <input
+                    type="radio"
+                    name="bloodType"
+                    value="3"
+                    checked={bloodType === "3"}
+                    onChange={(e) => setBloodType(e.target.value)}
+                    required
+                  />
+                  <span>B</span>
+                </label>
+                <label className={styles.label}>
+                  <input
+                    type="radio"
+                    name="bloodType"
+                    value="4"
+                    checked={bloodType === "4"}
+                    onChange={(e) => setBloodType(e.target.value)}
+                    required
+                  />
+                  <span>AB</span>
+                </label>
+              </div>
             </div>
           </section>
         </div>
 
         <Button
           type="submit"
-          text="Începe procesul de slăbire"
+          text={translations.start_losing_weight}
           variant="colorButton"
         />
       </form>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2 className={styles.modalTitle}>
-          Aportul zilnic recomandat de calorii
+          {translations.recommended_calorie_intake}
         </h2>
         <p className={styles.calorieContainer}>
           <span className={styles.calorieNumber}>{recCalories}</span>
           <span className={styles.calorieUnit}> kcal</span>
         </p>
         <div className={styles.dividerLine}></div>
-        <h3 className={styles.modalSubtitle}>Alimente interzise</h3>
+        <h3 className={styles.modalSubtitle}>{translations.foods_not_eat}</h3>
         <ol className={styles.forbiddenFoodsList}>
           {forbiddenFoods.map((food, index) => (
             <li key={food._id || index}>{food.title}</li>
@@ -199,7 +220,7 @@ const DailyCaloriesForm = () => {
         <div className={styles.modalButtonContainer}>
           <Button
             type="button"
-            text="Începe procesul de slăbire"
+            text={translations.start_losing_weight}
             variant="colorButton"
             handlerFunction={handleStartLosingWeight}
           />

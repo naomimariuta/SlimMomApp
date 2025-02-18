@@ -8,13 +8,13 @@
 }
 
 .title {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 34px;
   color: orange;
   text-align: center;
   margin-top: 40px;
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
 }
 
 .label {
@@ -61,7 +61,7 @@
   }
   .title {
     margin: 0;
-    text-align: left;
+    text-align: center;
     padding-top: 160px;
     padding-left: 20px;
     padding-bottom: 35px;

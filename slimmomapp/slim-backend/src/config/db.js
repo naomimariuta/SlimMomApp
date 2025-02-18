@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const connectDB = async () => {
-  const { DB_HOST } = process.env.DB_HOST;
+  const DB_HOST = process.env.DB_HOST;
   mongoose
     .connect(DB_HOST)
     .then(() => {
@@ -10,4 +10,4 @@ const connectDB = async () => {
       console.error("Database connection error:", error.message);
     });
 };
-module.exports = connectDB();
+module.exports = connectDB;
