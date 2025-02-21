@@ -63,6 +63,28 @@ const DailyCaloriesForm = () => {
     });
   };
 
+  const saveCalorieData = async (dailyKcal, notRecommendedProducts) => {
+    console.log("sunt in saveCalorieData");
+    const calorieInfo = {
+      height: formData.height,
+      age: formData.age,
+      currentWeight: formData.currentWeight,
+      desireWeight: formData.desireWeight,
+      bloodType: bloodType,
+      dailyRate: dailyKcal,
+      notRecommendedFoods:
+        notRecommendedProducts.map((food) => food.title) || [],
+    };
+    console.log("am iesit si intru la saveCalorieInfo");
+    await saveCalorieInfo(calorieInfo);
+    setCalorieInfo(calorieInfo);
+
+    setAuth((prevAuth) => ({
+      ...prevAuth,
+      calorieInfo: calorieInfo,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(showLoader());
@@ -95,28 +117,6 @@ const DailyCaloriesForm = () => {
   const handleStartLosingWeight = () => {
     setIsModalOpen(false);
     navigate("/register");
-  };
-
-  const saveCalorieData = async (dailyKcal, notRecommendedProducts) => {
-    console.log("sunt in saveCalorieData");
-    const calorieInfo = {
-      height: formData.height,
-      age: formData.age,
-      currentWeight: formData.currentWeight,
-      desireWeight: formData.desireWeight,
-      bloodType: bloodType,
-      dailyRate: dailyKcal,
-      notRecommendedFoods:
-        notRecommendedProducts.map((food) => food.title) || [],
-    };
-    console.log("am iesit si intru la saveCalorieInfo");
-    await saveCalorieInfo(calorieInfo);
-    setCalorieInfo(calorieInfo);
-
-    setAuth((prevAuth) => ({
-      ...prevAuth,
-      calorieInfo: calorieInfo,
-    }));
   };
 
   return (

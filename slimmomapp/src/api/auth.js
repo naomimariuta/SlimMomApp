@@ -3,6 +3,7 @@ import axiosInstance from "./axios";
 // Funcție pentru înregistrare
 export const register = async (userData) => {
   try {
+    console.log(userData);
     const response = await axiosInstance.post("/auth/register", userData);
     return response.data;
   } catch (error) {

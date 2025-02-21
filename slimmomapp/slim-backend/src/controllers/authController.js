@@ -1,8 +1,8 @@
+require("dotenv").config();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Session = require("../models/Session");
-require("dotenv").config();
 
 // Helper function for creating JWT token
 const createToken = (userId, role, secret, expiresIn) => {
@@ -39,13 +39,15 @@ const register = async (req, res) => {
       process.env.JWT_SECRET,
       "1h"
     );
-
+    console.log(token);
+    // localStorage.setItem("token", token);
     res.cookie("token", token, { httpOnly: true, sameSite: "strict" });
     res.status(201).json({
       token,
       user: { name: user.name, email: user.email, role: user.role },
     });
   } catch (error) {
+    console.log("Register error");
     res.status(500).json({ error: error.message });
   }
 };
@@ -74,7 +76,6 @@ const login = async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
       "7d"
     );
-
     // Save refresh token in session
     await new Session({ userId: user._id, refreshToken }).save();
 

@@ -15,6 +15,9 @@ const AddProductPage = () => {
 
   const handleSaveProduct = async (product) => {
     try {
+      console.log(auth.token);
+      console.log(localStorage.getItem("token"));
+
       const response = await axios.post(
         "http://localhost:3000/api/products/consumed",
         {
