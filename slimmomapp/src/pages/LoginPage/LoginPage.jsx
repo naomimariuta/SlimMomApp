@@ -17,8 +17,13 @@ const LoginPage = () => {
   const handleLogin = async (email, password) => {
     try {
       const data = await login({ email, password });
-      localStorage.setItem("token", data.token);
-      setAuth({ token: data.token, isAuthenticated: true, user: data.user });
+      localStorage.setItem("token", data.accessToken);
+      console.log(data.accessToken);
+      setAuth({
+        token: data.accessToken,
+        isAuthenticated: true,
+        user: data.user,
+      });
       navigate(redirectTo);
     } catch (err) {
       setError(err.message);

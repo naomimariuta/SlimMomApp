@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const storedToken = localStorage.getItem("token");
+  const storedToken = localStorage.getItem("token") || "";
   const storedUser = localStorage.getItem("user");
 
   // Adăugăm verificări suplimentare pentru storedUser
@@ -32,6 +32,7 @@ const AuthProvider = ({ children }) => {
     if (auth.user) {
       console.log("User name:", auth.user.name);
     }
+    console.log("Auth state updated:", auth);
   }, [auth]);
 
   return (

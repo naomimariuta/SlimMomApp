@@ -25,7 +25,8 @@ const Header = () => {
     } catch (err) {
       console.error("Logout failed:", err);
     }
-  }, [auth.user, setAuth]);
+    navigate("/");
+  }, [auth.user, navigate, setAuth]);
 
   const handleLogoClick = useCallback(async () => {
     if (auth.isAuthenticated) {
